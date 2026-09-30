@@ -11,6 +11,8 @@ namespace RoboRampage.scripts
 		public float JumpVelocity {get;set;} = 4.5f;
 		[Export]
 		public float MouseSensitivity {get;set;} = 0.001f;
+		[Export]
+		public Node3D CameraPivot{get;set;}
 
 		private Vector2 _mouseMotion = Vector2.Zero;
 
@@ -80,6 +82,10 @@ namespace RoboRampage.scripts
 		public void HandleCameraRotation()
 		{
 			RotateY(_mouseMotion.X);
+			CameraPivot.RotateX(_mouseMotion.Y);
+			Vector3 rotationDegrees = CameraPivot.RotationDegrees;
+			rotationDegrees.X = Mathf.Clamp(rotationDegrees.X, -90.0f, 90.0f);
+			CameraPivot.RotationDegrees = rotationDegrees;
 			_mouseMotion = Vector2.Zero;
 		}
 
