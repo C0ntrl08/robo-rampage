@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://463yatynwajp" path="res://scripts/Player.cs" id="1_ulp21"]
 [ext_resource type="Script" uid="uid://d1dobflk78awg" path="res://scripts/SmoothCamera.cs" id="2_3c3w1"]
+[ext_resource type="Script" uid="uid://bu651c8jwqny1" path="res://scripts/Crosshair.cs" id="3_wnvi2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_77lue"]
 
@@ -24,3 +25,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 top_level = true
 script = ExtResource("2_3c3w1")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=3015020]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="Control" parent="CenterContainer" unique_id=686566854]
+layout_mode = 2
+script = ExtResource("3_wnvi2")
