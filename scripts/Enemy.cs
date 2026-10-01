@@ -7,6 +7,10 @@ namespace RoboRampage.scripts
 	{
 		[Export]
 		public NavigationAgent3D NavigationAgent{get;set;}
+		[Export]
+		public float AttackRange {get;set;} = 1.5f;
+		[Export]
+		public AnimationPlayer AttackAnimationPlayer {get;set;}
 
 		private CharacterBody3D Player {get;set;}
 		private bool Provoked{get;set;} = false;
@@ -49,8 +53,17 @@ namespace RoboRampage.scripts
 				Provoked = true;
 			}
 
+			if (Provoked)
+			{
+				if (distance <= AttackRange)
+				{
+					AttackAnimationPlayer.Play("Attack");
+				}
+			}
+
 			if (direction != Vector3.Zero)
 			{
+				LookAtTarget(direction);
 				velocity.X = direction.X * Speed;
 				velocity.Z = direction.Z * Speed;
 			}
@@ -64,5 +77,20 @@ namespace RoboRampage.scripts
 
 			MoveAndSlide();
 		}
+
+		public void Attack()
+		{
+			GD.Print("Enemy Attack");
+		}
+
+		private void LookAtTarget(Vector3 direction)
+		{
+			Vector3 adjustedDirection = direction;
+			adjustedDirection.Y = 0;
+
+			LookAt(GlobalPosition + adjustedDirection, Vector3.Up, true);
+		}
+
+		
 	}
 }
