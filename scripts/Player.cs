@@ -8,12 +8,14 @@ namespace RoboRampage.scripts
 		[Export]
 		public float Speed {get;set;} = 5.0f;
 		[Export]
-		public float JumpVelocity {get;set;} = 4.5f;
+		public float JumpHeight {get;set;} = 1.0f;
+		[Export]
+		public float FallMultiplier{get;set;} = 3.0f;
 		[Export]
 		public float MouseSensitivity {get;set;} = 0.001f;
 		[Export]
 		public Node3D CameraPivot{get;set;}
-
+		
 		private Vector2 _mouseMotion = Vector2.Zero;
 
 		private const string _moveForward = "move_forward";
@@ -37,13 +39,21 @@ namespace RoboRampage.scripts
 			// Add the gravity.
 			if (!IsOnFloor())
 			{
-				velocity += GetGravity() * (float)delta;
+				if (velocity.Y >= 0)
+				{
+					velocity.Y += (float)(GetGravity().Y * delta);
+				}
+				else
+				{
+					velocity.Y += (float)(GetGravity().Y * delta * FallMultiplier);
+				}
 			}
 
 			// Handle Jump.
 			if (Input.IsActionJustPressed(_jump) && IsOnFloor())
 			{
-				velocity.Y = JumpVelocity;
+				double gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsDouble();
+				velocity.Y = (float)Math.Sqrt(JumpHeight * 2.0f * gravity);
 			}
 
 			Vector2 inputDir = Input.GetVector(_moveLeft, _moveRight, _moveForward, _moveBack);
