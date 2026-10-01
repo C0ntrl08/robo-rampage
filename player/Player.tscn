@@ -8,9 +8,8 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_77lue"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot")]
+[node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot") groups=["Player"]]
 script = ExtResource("1_ulp21")
-FallMultiplier = 3.0
 CameraPivot = NodePath("CameraPivot")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=839811925]

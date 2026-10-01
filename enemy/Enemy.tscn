@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bprpi4p6jelk7"]
+
+[ext_resource type="Script" uid="uid://s12iuriposbb" path="res://scripts/Enemy.cs" id="1_d1f0f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q3d5o"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d1f0f"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=993408678 node_paths=PackedStringArray("NavigationAgent")]
+script = ExtResource("1_d1f0f")
+NavigationAgent = NodePath("NavigationAgent3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=710488489]
+mesh = SubResource("CapsuleMesh_q3d5o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2018042465]
+shape = SubResource("CapsuleShape3D_d1f0f")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1697147256]
+debug_enabled = true

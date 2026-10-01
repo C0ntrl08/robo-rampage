@@ -24,6 +24,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="robo-rampage"
 
+[global_group]
+
+Player=""
+
 [input]
 
 move_forward={
