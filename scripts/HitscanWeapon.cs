@@ -1,6 +1,6 @@
 using Godot;
 
-namespace RoboRampage.script
+namespace RoboRampage.scripts
 {
 	public partial class HitscanWeapon : Node3D
 	{
@@ -11,12 +11,15 @@ namespace RoboRampage.script
 		[Export]
 		public float Recoil {get; set;} = 0.05f;
 		[Export]
+		public int WeaponDamage {get;set;} = 10;
+		[Export]
 		public Node3D WeaponMesh {get;set;}
 		[Export]
 		public RayCast3D RayCast3D {get;set;}
 
 		protected Vector3 WeaponPosition{get;set;}
-		private const string FIRE = "fire";
+		protected Enemy Enemy {get;set;}
+		protected const string FIRE = "fire";
 
 
 		public override void _Ready()
@@ -40,9 +43,14 @@ namespace RoboRampage.script
 		public void Shoot()
 		{
 			CooldownTimer.Start(1.0f / FireRate);
-			GD.Print(RayCast3D.GetCollider());
+			var collider = RayCast3D.GetCollider();
+			GD.Print(collider);
 			
 			WeaponMesh.Position = new Godot.Vector3(WeaponMesh.Position.X, WeaponMesh.Position.Y, WeaponMesh.Position.Z + Recoil);
+			if (collider is Enemy enemy)
+			{
+				enemy.HitPoints -= WeaponDamage;
+			}
 		}
 	}
 }

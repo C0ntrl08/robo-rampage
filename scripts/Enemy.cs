@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace RoboRampage.scripts
 {
@@ -10,11 +9,29 @@ namespace RoboRampage.scripts
 		[Export]
 		public float AttackRange {get;set;} = 1.5f;
 		[Export]
+		public int MaxHitPoints{get;set;} = 100;
+		[Export]
+		public int AttackDamage {get;set;} = 20;
+		[Export]
 		public AnimationPlayer AttackAnimationPlayer {get;set;}
 
 		private CharacterBody3D Player {get;set;}
 		private bool Provoked{get;set;} = false;
 		private float AggroRange {get;set;} = 12.0f;
+		private int _hitPoints;
+		public int HitPoints
+		{
+			get { return _hitPoints; }
+			set
+			{
+				_hitPoints = value;
+				if (_hitPoints <= 0)
+				{
+					QueueFree();
+				}
+				Provoked = true;
+			}
+		}
 
 		public const float Speed = 5.0f;
 		public const float JumpVelocity = 4.5f;
@@ -22,7 +39,7 @@ namespace RoboRampage.scripts
         public override void _Ready()
         {
 			Player = (CharacterBody3D)GetTree().GetFirstNodeInGroup("Player");
-            
+			_hitPoints = MaxHitPoints;
         }
 
         public override void _Process(double delta)
@@ -81,6 +98,7 @@ namespace RoboRampage.scripts
 		public void Attack()
 		{
 			GD.Print("Enemy Attack");
+			((Player)Player).HitPoints -= AttackDamage;
 		}
 
 		private void LookAtTarget(Vector3 direction)

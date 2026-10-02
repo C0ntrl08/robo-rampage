@@ -15,6 +15,23 @@ namespace RoboRampage.scripts
 		public float MouseSensitivity {get;set;} = 0.001f;
 		[Export]
 		public Node3D CameraPivot{get;set;}
+		[Export]
+		public int MaxHitPoints{get;set;} = 100;
+
+		private int _hitPoints;
+		public int HitPoints
+		{
+			get { return _hitPoints; }
+			set
+			{
+				_hitPoints = value;
+				GD.Print(_hitPoints);
+				if (_hitPoints <= 0)
+				{
+					GetTree().Quit();
+				}
+			}
+		}
 		
 		private Vector2 _mouseMotion = Vector2.Zero;
 
@@ -28,6 +45,7 @@ namespace RoboRampage.scripts
         public override void _Ready()
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
+			_hitPoints = MaxHitPoints;
         }
 
 		public override void _PhysicsProcess(double delta)
