@@ -3,8 +3,45 @@
 [ext_resource type="PackedScene" uid="uid://bnbn0i463gu15" path="res://weapons/HitscanWeapon.tscn" id="1_8d1xs"]
 [ext_resource type="PackedScene" uid="uid://blx4fgdiec38m" path="res://assets/SMG.glb" id="2_ecj8m"]
 
-[node name="SMG" unique_id=1830548734 node_paths=PackedStringArray("WeaponMesh") instance=ExtResource("1_8d1xs")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmpwh"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="Curve" id="Curve_ecj8m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g7xd4"]
+curve = SubResource("Curve_ecj8m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ysawb"]
+direction = Vector3(0, 0, -1)
+spread = 8.0
+initial_velocity_min = 6.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_g7xd4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_77lue"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="SMG" unique_id=1830548734 node_paths=PackedStringArray("WeaponMesh", "MuzzleFlash") instance=ExtResource("1_8d1xs")]
 WeaponMesh = NodePath("SMG")
+MuzzleFlash = NodePath("MuzzleFlash")
 
 [node name="SMG" parent="." index="1" unique_id=1189672302 instance=ExtResource("2_ecj8m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.35, -1)
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="." index="3" unique_id=480981776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.3, -2.1)
+material_override = SubResource("StandardMaterial3D_hmpwh")
+cast_shadow = 0
+emitting = false
+lifetime = 0.06999999999999999
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ysawb")
+draw_pass_1 = SubResource("BoxMesh_77lue")

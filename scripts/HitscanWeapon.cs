@@ -16,6 +16,8 @@ namespace RoboRampage.scripts
 		public Node3D WeaponMesh {get;set;}
 		[Export]
 		public RayCast3D RayCast3D {get;set;}
+		[Export]
+		public GpuParticles3D MuzzleFlash {get;set;}
 
 		protected Vector3 WeaponPosition{get;set;}
 		protected Enemy Enemy {get;set;}
@@ -42,6 +44,8 @@ namespace RoboRampage.scripts
 
 		public void Shoot()
 		{
+			MuzzleFlash.Restart();
+			
 			CooldownTimer.Start(1.0f / FireRate);
 			var collider = RayCast3D.GetCollider();
 			GD.Print(collider);
