@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://i6bqx6dyicpv"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_nc8pn"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_y8rqh"]
+constant = 2.0
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_4u65u"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_nc8pn"]
+parameter_name = "Screen"
+texture_type = 1
+texture_filter = 4
+texture_source = 1
+
+[sub_resource type="VisualShader" id="VisualShader_nc8pn"]
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(600, 120)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_nc8pn")
+nodes/fragment/2/position = Vector2(-80, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_y8rqh")
+nodes/fragment/3/position = Vector2(-80, 200)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_4u65u")
+nodes/fragment/4/position = Vector2(300, 120)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_nc8pn")
+nodes/fragment/5/position = Vector2(-80, 300)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 4, 0, 0, 0, 5, 0, 4, 2)
+
+[resource]
+shader = SubResource("VisualShader_nc8pn")

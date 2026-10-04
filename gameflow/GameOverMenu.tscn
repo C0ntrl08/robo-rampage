@@ -2,10 +2,13 @@
 
 [ext_resource type="FontFile" uid="uid://v6x7lyl8jx3t" path="res://assets/Staatliches/Staatliches-Regular.ttf" id="1_jlwtg"]
 [ext_resource type="Script" uid="uid://btlppmuycq0ro" path="res://scripts/GameOverMenu.cs" id="2_rx82y"]
+[ext_resource type="Material" uid="uid://i6bqx6dyicpv" path="res://shaders/BackgroundShader.tres" id="3_j8sfh"]
 
 [sub_resource type="Theme" id="Theme_77lue"]
 default_font = ExtResource("1_jlwtg")
 default_font_size = 64
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rx82y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jlwtg"]
 font_size = 96
@@ -20,6 +23,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_77lue")
 script = ExtResource("2_rx82y")
+
+[node name="BackgroundBlur" type="TextureRect" parent="." unique_id=1543138110]
+material = ExtResource("3_j8sfh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_rx82y")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1723085398]
 layout_mode = 1
