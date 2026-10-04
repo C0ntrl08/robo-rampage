@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://463yatynwajp" path="res://scripts/Player.cs" id="1_ulp21"]
 [ext_resource type="Script" uid="uid://d1dobflk78awg" path="res://scripts/SmoothCamera.cs" id="2_3c3w1"]
-[ext_resource type="PackedScene" uid="uid://cmve7b2fbsvji" path="res://weapons/SMG.tscn" id="3_83hs8"]
+[ext_resource type="PackedScene" uid="uid://dswmhig14cmwh" path="res://weapons/Rifle.tscn" id="3_aqcbf"]
 [ext_resource type="Script" uid="uid://bu651c8jwqny1" path="res://scripts/Crosshair.cs" id="3_wnvi2"]
 [ext_resource type="Texture2D" uid="uid://cp5itjdmgbaxj" path="res://assets/damage.png" id="5_x8kxw"]
 [ext_resource type="PackedScene" uid="uid://s5sifdbvqcb" path="res://gameflow/GameOverMenu.tscn" id="6_aqcbf"]
@@ -40,7 +40,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_gskgj"]
 resource_name = "TakeDamage"
-length = 0.39999999999999997
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -93,10 +93,10 @@ top_level = true
 cull_mask = 1048573
 script = ExtResource("2_3c3w1")
 
-[node name="SMG" parent="CameraPivot/SmoothCamera" unique_id=1830548734 instance=ExtResource("3_83hs8")]
-
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera" unique_id=1689326766]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
+
+[node name="Rifle" parent="CameraPivot/SmoothCamera" unique_id=1830548734 instance=ExtResource("3_aqcbf")]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1799839149]
 anchors_preset = 15

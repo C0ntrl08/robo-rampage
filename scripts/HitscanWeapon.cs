@@ -20,6 +20,8 @@ namespace RoboRampage.scripts
 		public GpuParticles3D MuzzleFlash {get;set;}
 		[Export]
 		public PackedScene Sparks{get;set;}
+		[Export]
+		public bool IsAutomatic{get;set;}
 
 		protected Vector3 WeaponPosition{get;set;}
 		protected Enemy Enemy {get;set;}
@@ -33,13 +35,29 @@ namespace RoboRampage.scripts
 
 		public override void _Process(double delta)
 		{
-			if (Input.IsActionPressed(FIRE))
+			if (IsAutomatic)
 			{
-				if (CooldownTimer.IsStopped())
+				if (Input.IsActionPressed(FIRE))
 				{
-					Shoot();
+					if (CooldownTimer.IsStopped())
+					{
+						Shoot();
+					}
 				}
 			}
+			else
+			{
+				if (Input.IsActionJustPressed(FIRE))
+				{
+					if (CooldownTimer.IsStopped())
+					{
+						Shoot();
+					}
+				}
+			}
+				
+
+			
 
 			WeaponMesh.Position = WeaponMesh.Position.Lerp(WeaponPosition, (float)delta * 10.0f);
 		}
