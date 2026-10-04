@@ -19,6 +19,8 @@ namespace RoboRampage.scripts
 		public int MaxHitPoints{get;set;} = 100;
 		[Export]
 		public AnimationPlayer DamageAnimationPlayer{get;set;}
+		[Export]
+		public GameOverMenu GameOverMenu{get;set;}
 
 		private int _hitPoints;
 		public int HitPoints
@@ -29,13 +31,13 @@ namespace RoboRampage.scripts
 				if (value < _hitPoints)
 				{
 					DamageAnimationPlayer.Stop(false);
-					DamageAnimationPlayer.Play("TakeDamage");
+					DamageAnimationPlayer.Play(_takeDamage);
 				}
 				_hitPoints = value;
 				GD.Print(_hitPoints);
 				if (_hitPoints <= 0)
 				{
-					GetTree().Quit();
+					GameOverMenu.GameOver();
 				}
 			}
 		}
@@ -48,6 +50,8 @@ namespace RoboRampage.scripts
 		private const string _moveBack = "move_back";
 		private const string _jump = "jump";
 		private const string _cancel = "ui_cancel";
+
+		private const string _takeDamage = "TakeDamage";
 
         public override void _Ready()
         {

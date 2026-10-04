@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cmve7b2fbsvji" path="res://weapons/SMG.tscn" id="3_83hs8"]
 [ext_resource type="Script" uid="uid://bu651c8jwqny1" path="res://scripts/Crosshair.cs" id="3_wnvi2"]
 [ext_resource type="Texture2D" uid="uid://cp5itjdmgbaxj" path="res://assets/damage.png" id="5_x8kxw"]
+[ext_resource type="PackedScene" uid="uid://s5sifdbvqcb" path="res://gameflow/GameOverMenu.tscn" id="6_aqcbf"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_77lue"]
 
@@ -71,10 +72,11 @@ _data = {
 &"TakeDamage": SubResource("Animation_gskgj")
 }
 
-[node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot", "DamageAnimationPlayer") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot", "DamageAnimationPlayer", "GameOverMenu") groups=["Player"]]
 script = ExtResource("1_ulp21")
 CameraPivot = NodePath("CameraPivot")
 DamageAnimationPlayer = NodePath("DamageTexture/DamageAnimationPlayer")
+GameOverMenu = NodePath("GameOverMenu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=839811925]
 mesh = SubResource("CapsuleMesh_77lue")
@@ -139,3 +141,6 @@ texture = ExtResource("5_x8kxw")
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="DamageTexture" unique_id=1550167552]
 libraries/ = SubResource("AnimationLibrary_06mnu")
 autoplay = &"RESET"
+
+[node name="GameOverMenu" parent="." unique_id=1704637340 instance=ExtResource("6_aqcbf")]
+visible = false
