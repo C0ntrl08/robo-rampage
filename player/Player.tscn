@@ -4,14 +4,77 @@
 [ext_resource type="Script" uid="uid://d1dobflk78awg" path="res://scripts/SmoothCamera.cs" id="2_3c3w1"]
 [ext_resource type="PackedScene" uid="uid://cmve7b2fbsvji" path="res://weapons/SMG.tscn" id="3_83hs8"]
 [ext_resource type="Script" uid="uid://bu651c8jwqny1" path="res://scripts/Crosshair.cs" id="3_wnvi2"]
+[ext_resource type="Texture2D" uid="uid://cp5itjdmgbaxj" path="res://assets/damage.png" id="5_x8kxw"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_77lue"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_77lue"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot") groups=["Player"]]
+[sub_resource type="Animation" id="Animation_aqcbf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gskgj"]
+resource_name = "TakeDamage"
+length = 0.39999999999999997
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_06mnu"]
+_data = {
+&"RESET": SubResource("Animation_aqcbf"),
+&"TakeDamage": SubResource("Animation_gskgj")
+}
+
+[node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot", "DamageAnimationPlayer") groups=["Player"]]
 script = ExtResource("1_ulp21")
 CameraPivot = NodePath("CameraPivot")
+DamageAnimationPlayer = NodePath("DamageTexture/DamageAnimationPlayer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=839811925]
 mesh = SubResource("CapsuleMesh_77lue")
@@ -25,9 +88,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="SmoothCamera" type="Camera3D" parent="CameraPivot" unique_id=910182867]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 top_level = true
+cull_mask = 1048573
 script = ExtResource("2_3c3w1")
 
 [node name="SMG" parent="CameraPivot/SmoothCamera" unique_id=1830548734 instance=ExtResource("3_83hs8")]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera" unique_id=1689326766]
+remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1799839149]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1388665617]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="WeaponCamera" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=1442503972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+cull_mask = 2
+fov = 40.0
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=3015020]
 anchors_preset = 15
@@ -39,3 +125,17 @@ grow_vertical = 2
 [node name="Crosshair" type="Control" parent="CenterContainer" unique_id=686566854]
 layout_mode = 2
 script = ExtResource("3_wnvi2")
+
+[node name="DamageTexture" type="TextureRect" parent="." unique_id=2127123897]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("5_x8kxw")
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="DamageTexture" unique_id=1550167552]
+libraries/ = SubResource("AnimationLibrary_06mnu")
+autoplay = &"RESET"

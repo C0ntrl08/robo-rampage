@@ -17,6 +17,8 @@ namespace RoboRampage.scripts
 		public Node3D CameraPivot{get;set;}
 		[Export]
 		public int MaxHitPoints{get;set;} = 100;
+		[Export]
+		public AnimationPlayer DamageAnimationPlayer{get;set;}
 
 		private int _hitPoints;
 		public int HitPoints
@@ -24,6 +26,11 @@ namespace RoboRampage.scripts
 			get { return _hitPoints; }
 			set
 			{
+				if (value < _hitPoints)
+				{
+					DamageAnimationPlayer.Stop(false);
+					DamageAnimationPlayer.Play("TakeDamage");
+				}
 				_hitPoints = value;
 				GD.Print(_hitPoints);
 				if (_hitPoints <= 0)
