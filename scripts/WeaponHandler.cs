@@ -16,7 +16,6 @@ namespace RoboRampage.scripts
         private const string NEXTWEAPON = "next_weapon";
         private const string LASTWEAPON = "last_weapon";
 
-
         public override void _Ready()
         {
             Equip(Weapon1);
@@ -45,16 +44,18 @@ namespace RoboRampage.scripts
 
         public void Equip(Node3D activeWeapon)
         {
-            foreach (Node3D child in GetChildren().Cast<Node3D>())
+            foreach (var child in GetChildren())
             {
                 if (child == activeWeapon)
                 {
-                    child.Visible = true;
+                    ((Node3D)child).Visible = true;
                     child.SetProcess(true);
+                    var weapon = (HitscanWeapon)child;
+                    weapon.AmmoHandler.UpdateAmmoLabel(weapon.AmmoType);
                 }
                 else
                 {
-                    child.Visible = false;
+                    ((Node3D)child).Visible = false;
                     child.SetProcess(false);
                 }
             }
