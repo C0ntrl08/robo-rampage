@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cmve7b2fbsvji" path="res://weapons/SMG.tscn" id="5_mhpjh"]
 [ext_resource type="Texture2D" uid="uid://cp5itjdmgbaxj" path="res://assets/damage.png" id="5_x8kxw"]
 [ext_resource type="PackedScene" uid="uid://s5sifdbvqcb" path="res://gameflow/GameOverMenu.tscn" id="6_aqcbf"]
+[ext_resource type="Script" uid="uid://xfxwg21p8ooc" path="res://scripts/AmmoHandler.cs" id="6_mhpjh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_77lue"]
 
@@ -122,9 +123,15 @@ script = ExtResource("3_06mnu")
 Weapon1 = NodePath("Rifle")
 Weapon2 = NodePath("SMG")
 
-[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" unique_id=1830548734 instance=ExtResource("3_aqcbf")]
+[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" unique_id=1830548734 node_paths=PackedStringArray("AmmoHandler") instance=ExtResource("3_aqcbf")]
+AmmoHandler = NodePath("../../AmmoHandler")
 
-[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" unique_id=1693410904 instance=ExtResource("5_mhpjh")]
+[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" unique_id=1693410904 node_paths=PackedStringArray("AmmoHandler") instance=ExtResource("5_mhpjh")]
+AmmoHandler = NodePath("../../AmmoHandler")
+AmmoType = 1
+
+[node name="AmmoHandler" type="Node" parent="SubViewportContainer/SubViewport/WeaponCamera" unique_id=519044581]
+script = ExtResource("6_mhpjh")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=3015020]
 anchors_preset = 15
