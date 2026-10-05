@@ -13,6 +13,9 @@ namespace RoboRampage.scripts
 
         private const string WEAPON1 = "weapon_1";
         private const string WEAPON2 = "weapon_2";
+        private const string NEXTWEAPON = "next_weapon";
+        private const string LASTWEAPON = "last_weapon";
+
 
         public override void _Ready()
         {
@@ -28,6 +31,14 @@ namespace RoboRampage.scripts
             if (inputEvent.IsActionPressed(WEAPON2))
             {
                 Equip(Weapon2);
+            }
+            if (inputEvent.IsActionPressed(NEXTWEAPON))
+            {
+                NextWeapon();
+            }
+            if (inputEvent.IsActionPressed(LASTWEAPON))
+            {
+                LastWeapon();
             }
         }
 
@@ -47,6 +58,33 @@ namespace RoboRampage.scripts
                     child.SetProcess(false);
                 }
             }
+        }
+
+        public void NextWeapon()
+        {
+            int index = GetCurrentIndex();
+            index = Mathf.Wrap(index + 1, 0, GetChildCount());
+            Equip((Node3D)GetChild(index));
+        }
+
+        public void LastWeapon()
+        {
+            int index = GetCurrentIndex();
+            index = Mathf.Wrap(index - 1, 0, GetChildCount());
+            Equip((Node3D)GetChild(index));
+        }
+
+        private int GetCurrentIndex()
+        {
+            for (int index = 0; index < GetChildCount(); index++)
+            {
+                if (((Node3D)GetChild(index)).Visible)
+                {
+                    return index;
+                }
+            }
+
+            return 0;
         }
     }
 }
