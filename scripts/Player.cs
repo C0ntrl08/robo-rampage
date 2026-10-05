@@ -22,6 +22,8 @@ namespace RoboRampage.scripts
 		[Export]
 		public GameOverMenu GameOverMenu{get;set;}
 
+		public AmmoHandler AmmoHandler{get;set;}
+
 		private int _hitPoints;
 		public int HitPoints
 		{
@@ -57,6 +59,8 @@ namespace RoboRampage.scripts
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
 			_hitPoints = MaxHitPoints;
+
+			AmmoHandler = GetNode<AmmoHandler>("%AmmoHandler");
         }
 
 		public override void _PhysicsProcess(double delta)

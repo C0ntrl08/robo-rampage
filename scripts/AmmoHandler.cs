@@ -34,6 +34,12 @@ namespace RoboRampage.scripts
             }
         }
 
+        public void AddAmmo(AmmoType type, int amount)
+        {
+            AmmoStorage[type] += amount;
+            UpdateAmmoLabel(type);
+        }
+
         public void UpdateAmmoLabel(AmmoType type)
         {
             AmmoLabel.Text = AmmoStorage[type].ToString();
