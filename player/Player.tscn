@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://463yatynwajp" path="res://scripts/Player.cs" id="1_ulp21"]
 [ext_resource type="Script" uid="uid://d1dobflk78awg" path="res://scripts/SmoothCamera.cs" id="2_3c3w1"]
+[ext_resource type="Script" uid="uid://cyw2seshqw037" path="res://scripts/WeaponHandler.cs" id="3_06mnu"]
 [ext_resource type="PackedScene" uid="uid://dswmhig14cmwh" path="res://weapons/Rifle.tscn" id="3_aqcbf"]
 [ext_resource type="Script" uid="uid://bu651c8jwqny1" path="res://scripts/Crosshair.cs" id="3_wnvi2"]
+[ext_resource type="PackedScene" uid="uid://cmve7b2fbsvji" path="res://weapons/SMG.tscn" id="5_mhpjh"]
 [ext_resource type="Texture2D" uid="uid://cp5itjdmgbaxj" path="res://assets/damage.png" id="5_x8kxw"]
 [ext_resource type="PackedScene" uid="uid://s5sifdbvqcb" path="res://gameflow/GameOverMenu.tscn" id="6_aqcbf"]
 
@@ -96,8 +98,6 @@ script = ExtResource("2_3c3w1")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraPivot/SmoothCamera" unique_id=1689326766]
 remote_path = NodePath("../../../SubViewportContainer/SubViewport/WeaponCamera")
 
-[node name="Rifle" parent="CameraPivot/SmoothCamera" unique_id=1830548734 instance=ExtResource("3_aqcbf")]
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1799839149]
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,6 +116,15 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 cull_mask = 2
 fov = 40.0
+
+[node name="WeaponHandler" type="Node3D" parent="SubViewportContainer/SubViewport/WeaponCamera" unique_id=1182033234 node_paths=PackedStringArray("Weapon1", "Weapon2")]
+script = ExtResource("3_06mnu")
+Weapon1 = NodePath("Rifle")
+Weapon2 = NodePath("SMG")
+
+[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" unique_id=1830548734 instance=ExtResource("3_aqcbf")]
+
+[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" unique_id=1693410904 instance=ExtResource("5_mhpjh")]
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=3015020]
 anchors_preset = 15
