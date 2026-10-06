@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ds72f3coflf7"]
 
 [ext_resource type="Material" uid="uid://dq6y4nca0pp8r" path="res://materials/GrayMaterial.tres" id="1_hkwxo"]
+[ext_resource type="Texture2D" uid="uid://cw2mxcl41h2if" path="res://assets/level-floorplan.png" id="2_mt7cn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hkwxo"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,40 +23,125 @@ environment = SubResource("Environment_3348v")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1010399280]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 
+[node name="Overhang" type="CSGBox3D" parent="." unique_id=1658122929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.2, 1.5, 11.15)
+material_override = ExtResource("1_hkwxo")
+size = Vector3(22, 3, 15.1)
+
+[node name="Overhang2" type="CSGBox3D" parent="Overhang" unique_id=200957583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1000004, 0, 4.200001)
+material_override = ExtResource("1_hkwxo")
+operation = 2
+size = Vector3(22, 3, 15.1)
+
+[node name="Corridor7" type="CSGBox3D" parent="Overhang" unique_id=934306600]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -5.1000023, -0.25, -5.449999)
+material_override = ExtResource("1_hkwxo")
+operation = 2
+size = Vector3(4.6, 2.5, 3.2)
+
+[node name="Overhang2" type="CSGBox3D" parent="." unique_id=118053067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.05, 1.5, -4.8)
+material_override = ExtResource("1_hkwxo")
+size = Vector3(13.1, 3, 10.4)
+
+[node name="Overhang3" type="CSGBox3D" parent="Overhang2" unique_id=789989835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.200001, 0, 0)
+material_override = ExtResource("1_hkwxo")
+operation = 2
+size = Vector3(13.1, 3, 10.4)
+
+[node name="Overhang3" type="CSGBox3D" parent="." unique_id=903072352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 1.5, -9.15)
+material_override = ExtResource("1_hkwxo")
+size = Vector3(26.6, 3, 19.3)
+
+[node name="Overhang4" type="CSGBox3D" parent="Overhang3" unique_id=1547544671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05000019, 0, 0)
+material_override = ExtResource("1_hkwxo")
+operation = 2
+size = Vector3(20.7, 3, 13.7)
+
+[node name="Overhang4" type="CSGBox3D" parent="." unique_id=2114047495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.3, 1.5, -0.65)
+material_override = ExtResource("1_hkwxo")
+size = Vector3(9.6, 3, 30.7)
+
+[node name="Overhang5" type="CSGBox3D" parent="Overhang4" unique_id=1172439344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.6)
+material_override = ExtResource("1_hkwxo")
+operation = 2
+size = Vector3(9.6, 3, 30.7)
+
 [node name="Room" type="CSGBox3D" parent="." unique_id=1363650264]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 1.5, 13.3)
 material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(8, 4, 8)
+size = Vector3(11.8, 3, 11.6)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Room" unique_id=936759337]
 
-[node name="Corridor" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1441385233]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -6)
+[node name="Room2" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=2099106070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5, 1.5, -2.15)
+material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(2, 2, 4)
+size = Vector3(22, 6, 15.1)
 
-[node name="Corridor2" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1092498692]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, -1, -12)
+[node name="Corridor" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=443701989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.700001, -0.25, 0.19999981)
+material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(2, 2, 4)
+size = Vector3(7.8, 2.5, 3.8)
 
-[node name="Room2" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1688157196]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.9)
+[node name="Corridor2" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1792737284]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -29.600002, -0.25, -11.299999)
+material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(8, 4, 8)
+size = Vector3(3.4, 2.5, 3.2)
 
-[node name="Room3" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1843529315]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -11.9)
+[node name="Corridor3" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=477324301]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -29.6, 2.75, -11.3)
+material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(8, 4, 8)
+size = Vector3(3.4, 2.5, 3.2)
 
-[node name="Corridor3" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=470141773]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -6, -1, -11.9)
+[node name="Corridor4" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=592554976]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -19.499996, 2.75, -17.55)
+material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(2, 2, 4)
+size = Vector3(7, 2.5, 3.5)
 
-[node name="Room4" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1695042215]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11, 0, -12)
+[node name="Corridor5" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1584050309]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.549997, 2.75, -9.299999)
+material_override = ExtResource("1_hkwxo")
 flip_faces = true
-size = Vector3(8, 4, 8)
+size = Vector3(7.5, 2.5, 4.2000003)
+
+[node name="Corridor6" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1359818234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.300006, 2.75, -23.55)
+material_override = ExtResource("1_hkwxo")
+flip_faces = true
+size = Vector3(8.2, 2.5, 4.3)
+
+[node name="Room3" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1676535521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.350002, 1.5, -18.100002)
+material_override = ExtResource("1_hkwxo")
+flip_faces = true
+size = Vector3(13.1, 6, 10.400001)
+
+[node name="Room4" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1219933632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0000029, 1.5, -22.450005)
+material_override = ExtResource("1_hkwxo")
+flip_faces = true
+size = Vector3(26.6, 6, 19.300001)
+
+[node name="Room5" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=135254822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.999996, 1.5, -13.950003)
+material_override = ExtResource("1_hkwxo")
+flip_faces = true
+size = Vector3(9.6, 6, 30.7)
+
+[node name="FloorPlan" type="Sprite3D" parent="." unique_id=82367222]
+transform = Transform3D(2.4, 0, 0, 0, 2.4, 0, 0, 0, 2.4, 0, 0.1, 0)
+axis = 1
+texture = ExtResource("2_mt7cn")
