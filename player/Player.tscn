@@ -82,6 +82,7 @@ font_size = 64
 
 [node name="Player" type="CharacterBody3D" unique_id=1821399619 node_paths=PackedStringArray("CameraPivot", "DamageAnimationPlayer", "GameOverMenu") groups=["Player"]]
 script = ExtResource("1_ulp21")
+Speed = 8.0
 CameraPivot = NodePath("CameraPivot")
 DamageAnimationPlayer = NodePath("DamageTexture/DamageAnimationPlayer")
 GameOverMenu = NodePath("GameOverMenu")

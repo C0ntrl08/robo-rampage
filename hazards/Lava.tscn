@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cdwgvri6dueer"]
+
+[ext_resource type="Script" uid="uid://y3u608k3k5du" path="res://scripts/Lava.cs" id="1_q81tm"]
+[ext_resource type="Material" uid="uid://cc1hkint742sp" path="res://materials/LavaMaterial.tres" id="1_xymx5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ywbo8"]
+resource_local_to_scene = true
+size = Vector2(10, 10)
+
+[node name="Lava" type="Area3D" unique_id=754267231]
+script = ExtResource("1_q81tm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=927629748]
+material_override = ExtResource("1_xymx5")
+mesh = SubResource("PlaneMesh_ywbo8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1945219075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(1, 0.5019608, 0, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_attenuation = 0.1
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
