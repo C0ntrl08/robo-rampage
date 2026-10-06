@@ -74,20 +74,21 @@ namespace RoboRampage.scripts
 
 				CooldownTimer.Start(1.0f / FireRate);
 				var collider = RayCast3D.GetCollider();
-				GD.Print(collider);
+				// GD.Print(collider);
 
 				WeaponMesh.Position = new Godot.Vector3(WeaponMesh.Position.X, WeaponMesh.Position.Y, WeaponMesh.Position.Z + Recoil);
-				if (collider is Enemy enemy)
+				if (RayCast3D.IsColliding())
 				{
-					enemy.HitPoints -= WeaponDamage;
+					if (collider is Enemy enemy)
+					{
+						enemy.HitPoints -= WeaponDamage;
+					}
+
+					Node3D spark = Sparks.Instantiate<Node3D>();
+					AddChild(spark);
+					spark.GlobalPosition = RayCast3D.GetCollisionPoint();
 				}
-
-				Node3D spark = Sparks.Instantiate<Node3D>();
-				AddChild(spark);
-				spark.GlobalPosition = RayCast3D.GetCollisionPoint();
 			}
-
-
 		}
 	}
 }

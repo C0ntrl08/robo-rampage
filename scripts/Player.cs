@@ -40,7 +40,7 @@ namespace RoboRampage.scripts
 					DamageAnimationPlayer.Play(_takeDamage);
 				}
 				_hitPoints = value;
-				GD.Print(_hitPoints);
+				// GD.Print(_hitPoints);
 				if (_hitPoints <= 0)
 				{
 					GameOverMenu.GameOver();

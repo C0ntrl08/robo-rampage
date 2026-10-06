@@ -7,6 +7,8 @@ namespace RoboRampage.scripts
     {
         [Export]
         public Label AmmoLabel{get;set;}
+        [Export]
+        public Node3D WeaponHandler{get;set;}
 
         public enum AmmoType
         {
@@ -30,14 +32,14 @@ namespace RoboRampage.scripts
             if (HasAmmo(type))
             {
                 AmmoStorage[type] -= 1;
-                UpdateAmmoLabel(type);
+                UpdateAmmoLabel(((WeaponHandler)WeaponHandler).GetWeaponAmmo());
             }
         }
 
         public void AddAmmo(AmmoType type, int amount)
         {
             AmmoStorage[type] += amount;
-            UpdateAmmoLabel(type);
+            UpdateAmmoLabel(((WeaponHandler)WeaponHandler).GetWeaponAmmo());
         }
 
         public void UpdateAmmoLabel(AmmoType type)

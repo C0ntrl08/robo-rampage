@@ -133,7 +133,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_d1f0f")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1697147256]
-debug_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=815418991]
 libraries/ = SubResource("AnimationLibrary_7lgfl")

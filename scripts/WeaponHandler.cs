@@ -61,6 +61,12 @@ namespace RoboRampage.scripts
             }
         }
 
+        public AmmoHandler.AmmoType GetWeaponAmmo()
+        {
+            var currentWeapon = GetChild<HitscanWeapon>(GetCurrentIndex());
+            return currentWeapon.AmmoType;
+        }
+
         public void NextWeapon()
         {
             int index = GetCurrentIndex();

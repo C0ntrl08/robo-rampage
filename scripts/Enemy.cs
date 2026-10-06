@@ -103,7 +103,7 @@ namespace RoboRampage.scripts
 
 		public void Attack()
 		{
-			GD.Print("Enemy Attack");
+			// GD.Print("Enemy Attack");
 			((Player)Player).HitPoints -= AttackDamage;
 		}
 
