@@ -12,9 +12,12 @@ namespace RoboRampage.scripts
 		public int MaxHitPoints{get;set;} = 100;
 		[Export]
 		public int AttackDamage {get;set;} = 20;
+		// [Export]
+		// public AnimationPlayer AttackAnimationPlayer {get;set;}
 		[Export]
-		public AnimationPlayer AttackAnimationPlayer {get;set;}
+		public AnimationTree AnimationTree { get; set; }
 
+		private AnimationNodeStateMachinePlayback Playback { get; set; }
 		private CharacterBody3D Player {get;set;}
 		private bool Provoked{get;set;} = false;
 		private float AggroRange {get;set;} = 12.0f;
@@ -40,6 +43,8 @@ namespace RoboRampage.scripts
         {
 			Player = (CharacterBody3D)GetTree().GetFirstNodeInGroup("Player");
 			_hitPoints = MaxHitPoints;
+
+			Playback = (AnimationNodeStateMachinePlayback)(GodotObject)AnimationTree.Get("parameters/playback");
         }
 
         public override void _Process(double delta)
@@ -74,7 +79,8 @@ namespace RoboRampage.scripts
 			{
 				if (distance <= AttackRange)
 				{
-					AttackAnimationPlayer.Play("Attack");
+					Playback.Travel("Attack");
+					// AttackAnimationPlayer.Play("Attack");
 				}
 			}
 

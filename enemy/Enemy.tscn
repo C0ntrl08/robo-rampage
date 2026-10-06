@@ -97,10 +97,34 @@ _data = {
 &"RESET": SubResource("Animation_7lgfl")
 }
 
-[node name="Enemy" type="CharacterBody3D" unique_id=993408678 node_paths=PackedStringArray("NavigationAgent", "AttackAnimationPlayer")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7lgfl"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5p6bu"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_80fio"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55d7h"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xgln8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_77lue"]
+states/Attack/node = SubResource("AnimationNodeAnimation_7lgfl")
+states/Attack/position = Vector2(600, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_5p6bu")
+states/Idle/position = Vector2(400, 100)
+states/Start/position = Vector2(181, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_80fio"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_55d7h"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_xgln8")]
+graph_offset = Vector2(-15, 6)
+
+[node name="Enemy" type="CharacterBody3D" unique_id=993408678 node_paths=PackedStringArray("NavigationAgent", "AnimationTree")]
 script = ExtResource("1_d1f0f")
 NavigationAgent = NodePath("NavigationAgent3D")
-AttackAnimationPlayer = NodePath("AnimationPlayer")
+AnimationTree = NodePath("AnimationTree")
 
 [node name="Drone" parent="." unique_id=1911062502 instance=ExtResource("2_7lgfl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -114,3 +138,7 @@ debug_enabled = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=815418991]
 libraries/ = SubResource("AnimationLibrary_7lgfl")
 autoplay = &"Idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1833042665]
+tree_root = SubResource("AnimationNodeStateMachine_77lue")
+anim_player = NodePath("../AnimationPlayer")
