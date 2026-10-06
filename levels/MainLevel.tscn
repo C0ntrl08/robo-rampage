@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://ds72f3coflf7"]
+
+[ext_resource type="Material" uid="uid://dq6y4nca0pp8r" path="res://materials/GrayMaterial.tres" id="1_hkwxo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hkwxo"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_mt7cn"]
+sky_material = SubResource("ProceduralSkyMaterial_hkwxo")
+
+[sub_resource type="Environment" id="Environment_3348v"]
+background_mode = 2
+sky = SubResource("Sky_mt7cn")
+glow_enabled = true
+
+[node name="MainLevel" type="Node3D" unique_id=2069108729]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=862284325]
+environment = SubResource("Environment_3348v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1010399280]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="Room" type="CSGBox3D" parent="." unique_id=1363650264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = ExtResource("1_hkwxo")
+flip_faces = true
+size = Vector3(8, 4, 8)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Room" unique_id=936759337]
+
+[node name="Corridor" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1441385233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -6)
+flip_faces = true
+size = Vector3(2, 2, 4)
+
+[node name="Corridor2" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1092498692]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, -1, -12)
+flip_faces = true
+size = Vector3(2, 2, 4)
+
+[node name="Room2" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1688157196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.9)
+flip_faces = true
+size = Vector3(8, 4, 8)
+
+[node name="Room3" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1843529315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -11.9)
+flip_faces = true
+size = Vector3(8, 4, 8)
+
+[node name="Corridor3" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=470141773]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -6, -1, -11.9)
+flip_faces = true
+size = Vector3(2, 2, 4)
+
+[node name="Room4" type="CSGBox3D" parent="Room/CSGCombiner3D" unique_id=1695042215]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -11, 0, -12)
+flip_faces = true
+size = Vector3(8, 4, 8)
